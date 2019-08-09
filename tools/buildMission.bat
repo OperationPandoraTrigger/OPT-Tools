@@ -14,6 +14,35 @@ IF NOT EXIST "%~dp0.\..\settings\setMetaData.bat" (
 :: Set meta infos
 CALL "%~dp0.\..\settings\setMetaData.bat"
 
+:: Check/Create symlink for mission folder
+IF NOT EXIST "%ArmaMissionSourceDir%\%OptMissionName%" (
+	:: Folder doesnt exist. Check for administrator privileges to be able to create it...
+	OPENFILES >NUL 2>&1
+	IF ERRORLEVEL 1 (
+		ECHO This batch script once-only requires administrator privileges to create the missing symlink.
+		ECHO Right-click on %~nx0 and select "Run as administrator".
+		ECHO Press any key to exit.
+		PAUSE > NUL
+		EXIT 1
+	)
+	ECHO Creating symlink...
+	MKLINK /D "%ArmaMissionSourceDir%\%OptMissionName%" "%OptMissionRepoDir%\%OptMissionName%" > NUL
+	) ELSE (
+	:: Folder exists. Write dummy file to source and look if it appears at the destination...	
+	ECHO Mission-Folder exists. Checking if its a valid symlink...
+	ECHO. > "%OptMissionRepoDir%\%OptMissionName%\LINKCHECK0815.tmp"
+	IF NOT EXIST "%ArmaMissionSourceDir%\%OptMissionName%\LINKCHECK0815.tmp" (
+		DEL "%OptMissionRepoDir%\%OptMissionName%\LINKCHECK0815.tmp"
+		ECHO The existing mission folder contains something else. Delete or rename it!
+		ECHO Press any key to exit.
+		PAUSE > NUL
+		EXIT 1
+	) ELSE (
+		ECHO Valid symlink for mission folder found.
+		DEL "%OptMissionRepoDir%\%OptMissionName%\LINKCHECK0815.tmp"
+	)
+)
+
 ECHO Packing %OptMissionName%.pbo ...
 "%~dp0.\..\helpers\armake2.exe" pack "%OptMissionRepoDir%\%OptMissionName%" "%ArmaMissionPboDir%\%OptMissionName%.pbo"
 
