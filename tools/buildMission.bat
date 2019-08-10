@@ -21,8 +21,8 @@ IF NOT EXIST "%ArmaMissionSourceDir%\%OptMissionName%" (
 	:: Folder doesnt exist. Check for administrator privileges to be able to create it...
 	OPENFILES >NUL 2>&1
 	IF ERRORLEVEL 1 (
-		ECHO This batch script once-only requires administrator privileges to create the missing symlink.
-		ECHO Right-click on %~nx0 and select "Run as administrator".
+		ECHO [101;93mThis batch script once-only requires administrator privileges to create a symlink.[0m
+		ECHO Right-click on %~nx0 and select "[31mRun as administrator[0m".
 		ECHO Press any key to exit.
 		PAUSE > NUL
 		EXIT 1
