@@ -8,6 +8,9 @@ SET "OptToolsRepoDir=n:\OPT-Repos\OPT-Tools\"
 SET "OptMissionRepoDir=n:\OPT-Repos\OPT-Mission\"
 SET "OptMissionName=OPT-TestMission.Altis"
 
+:: Set path to a directory where you securely store your OPT private key
+SET "OptKeysDir=n:\OPT-Repos\OPT-Keys\"
+
 :: Set ArmA paths
 SET "ArmaGameDir=C:\Program Files (x86)\Steam\steamapps\common\Arma 3\"
 SET "ArmaMissionPboDir=C:\Program Files (x86)\Steam\steamapps\common\Arma 3\MPMissions\"
@@ -28,12 +31,13 @@ SET WaitAtFinish=TRUE
 :: DO NOT EDIT BELOW THIS LINE :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :: Checking if you missed something...
-CALL :CHECK "%ArmaGameDir%\%ArmaServerExe%"
-CALL :CHECK "%ArmaGameDir%\%ArmaClientExe%"
 CALL :CHECK "%OptClientRepoDir%"
 CALL :CHECK "%OptServerRepoDir%"
 CALL :CHECK "%OptToolsRepoDir%"
 CALL :CHECK "%OptMissionRepoDir%\%OptMissionName%"
+CALL :CHECK "%OptKeysDir%"
+CALL :CHECK "%ArmaGameDir%\%ArmaServerExe%"
+CALL :CHECK "%ArmaGameDir%\%ArmaClientExe%"
 CALL :CHECK "%ArmaMissionPboDir%"
 CALL :CHECK "%ArmaMissionSourceDir%"
 EXIT /B 0
