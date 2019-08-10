@@ -4,6 +4,7 @@
 :: Set paths to your cloned OPT repositories
 SET "OptClientRepoDir=n:\OPT-Repos\OPT-Client-Mod\"
 SET "OptServerRepoDir=n:\OPT-Repos\OPT-Server-Mod\"
+SET "OptToolsRepoDir=n:\OPT-Repos\OPT-Tools\"
 SET "OptMissionRepoDir=n:\OPT-Repos\OPT-Mission\"
 SET "OptMissionName=OPT-TestMission.Altis"
 
@@ -31,6 +32,7 @@ CALL :CHECK "%ArmaGameDir%\%ArmaServerExe%"
 CALL :CHECK "%ArmaGameDir%\%ArmaClientExe%"
 CALL :CHECK "%OptClientRepoDir%"
 CALL :CHECK "%OptServerRepoDir%"
+CALL :CHECK "%OptToolsRepoDir%"
 CALL :CHECK "%OptMissionRepoDir%\%OptMissionName%"
 CALL :CHECK "%ArmaMissionPboDir%"
 CALL :CHECK "%ArmaMissionSourceDir%"

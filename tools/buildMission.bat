@@ -1,6 +1,8 @@
-:: This script will build the OPT mission.
-
 @ECHO OFF
+ECHO ***********************************************
+ECHO *** OPT-Mission builder v0.2                ***
+ECHO *** This script will build the OPT mission. ***
+ECHO ***********************************************
 
 :: Sanity checks
 IF NOT EXIST "%~dp0.\..\settings\setMetaData.bat" (
@@ -49,6 +51,7 @@ ECHO Packing %OptMissionName%.pbo ...
 ECHO.
 ECHO Done.
 
+IF [%1] == [noPause] GOTO :EOF
 IF %WaitAtFinish% == TRUE (
 	ECHO Press any key to exit.
 	PAUSE > NUL

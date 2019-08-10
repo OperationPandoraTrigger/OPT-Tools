@@ -1,6 +1,8 @@
-:: This script will build the OPT-Client mod.
-
 @ECHO OFF
+ECHO **************************************************
+ECHO *** OPT-Client-Mod builder v0.2                ***
+ECHO *** This script will build the OPT-Client mod. ***
+ECHO **************************************************
 
 :: Sanity checks
 IF NOT EXIST "%~dp0.\..\settings\setMetaData.bat" (
@@ -37,6 +39,7 @@ COPY /Y "%OptClientRepoDir%\opt4_icon.paa" "%OptClientRepoDir%\@OPT-Client\" > N
 ECHO.
 ECHO Done.
 
+IF [%1] == [noPause] GOTO :EOF
 IF %WaitAtFinish% == TRUE (
 	ECHO Press any key to exit.
 	PAUSE > NUL
