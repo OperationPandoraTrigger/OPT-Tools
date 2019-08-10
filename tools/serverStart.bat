@@ -31,9 +31,9 @@ IF NOT [%errorlevel%] == [0]  (
 )
 
 :: convert to absolute pathnames so armaserver can read it properly (relative paths and/or double backslashes)
-CALL :DirConvert "%OptServerRepoDir%\PBOs\dev\@CLib" CLib_Dir
-CALL :DirConvert "%OptClientRepoDir%\@OPT-Client" OPT-Client_Dir
-CALL :DirConvert "%OptServerRepoDir%\PBOs\dev\@OPT" OPT-Server_Dir
+CALL "%~dp0.\..\helpers\DirConvert.bat" "%OptServerRepoDir%\PBOs\dev\@CLib" CLib_Dir
+CALL "%~dp0.\..\helpers\DirConvert.bat" "%OptClientRepoDir%\@OPT-Client" OPT-Client_Dir
+CALL "%~dp0.\..\helpers\DirConvert.bat" "%OptServerRepoDir%\PBOs\dev\@OPT" OPT-Server_Dir
 
 :: change directory to ArmA directory (in which the server-exe resides)
 CD /D "%ArmaGameDir%"
@@ -48,24 +48,4 @@ IF [%1] == [noPause] GOTO :EOF
 IF %WaitAtFinish% == TRUE (
 	ECHO Press any key to exit.
 	PAUSE > NUL
-)
-
-EXIT /B 0
-
-:DirConvert
-:: Convert to absolute pathnames
-:: Parameter 1: input pathname. relative or absolute, with or without double backslashes
-:: Parameter 2: output variable name where the clean path is written to
-IF EXIST %1 (
-	SETLOCAL ENABLEDELAYEDEXPANSION
-	PUSHD %1
-	ECHO SET "%2=!CD!" > "%TEMP%\OPT_DirConvert.bat"
-	ENDLOCAL
-	CALL "%TEMP%\OPT_DirConvert.bat"
-	DEL "%TEMP%\OPT_DirConvert.bat"
-) ELSE (
-	ECHO %1 not found. Not build yet?
-	ECHO Press any key to exit.
-	PAUSE > NUL
-	EXIT 1
 )
