@@ -21,7 +21,7 @@ To automatically close the scripts after execution, execute them with a "noPause
 | buildMod_CLib.bat | Builds both dev- and release-versions of CLib from OPT-Server-Mod. |
 | buildMod_OPT-Client.bat | Packs and signs OPT-Client-Mod. If no keys are present in OptKeysDir, a fresh keypair will be generated first. |
 | buildMod_OPT-Server.bat | Builds both dev- and release-versions of OPT-Server-Mod. |
-| clientStartOffline.bat | Starting ArmA-Client with all build and additional mods. |
+| clientStartOffline.bat | Starting ArmA-Client with all built and additional mods. |
 | clientStartOnline.bat | Starting ArmA-Client with all built and additional mods and autoconnects to local DevServer. |
 | clientStop.bat | Shutdown local ArmA-Client. |
 | serverRestart.bat | Restarts local ArmA-DevServer. |
@@ -33,11 +33,11 @@ Here resides some internal helping tools or scripts. You don't need them directl
 
 | File | Info |
 |------|------|
-| armake2.exe | ArmA-Modding Tools from [KoffeinFlummi](https://github.com/KoffeinFlummi/armake2) |
+| armake2.exe | ArmA-Modding Tools by [KoffeinFlummi](https://github.com/KoffeinFlummi/armake2) |
 | DirConvert.bat | Converts and cleans any pathname to an absolute pathname and stores it in an environment variable. |
 | getPBOName.bat | Extracts PBO-Name from a header file. |
-| JREPL.bat | regex text processor from [Dave Benham](https://www.dostips.com/forum/viewtopic.php?t=6044) |
-| sleep.bat | Millisecond delays from [Dave Benham](https://stackoverflow.com/questions/29732878/delay-a-batch-file-in-under-a-second/29879492#29879492) |
+| JREPL.bat | regex text processor by [Dave Benham](https://www.dostips.com/forum/viewtopic.php?t=6044) |
+| sleep.bat | Millisecond delays by [Dave Benham](https://stackoverflow.com/questions/29732878/delay-a-batch-file-in-under-a-second/29879492#29879492) |
 
 ## Wiki
 Our knowledge base is hosted in a neighbor repository:
