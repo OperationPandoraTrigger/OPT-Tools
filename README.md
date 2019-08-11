@@ -3,14 +3,14 @@ These set of tools allows building and hosting of several OPT mods.
 
 ## Components
 
-**settings**  
+### /settings/
 
 | File | Info |
 |------|------|
 | setMetaData.bat | Copy/Rename the provided example and adjust your local filepaths and preferences. |
 | serverConfig.cfg | Serverconfig for the local ArmA-DevServer. Do not edit the mission-name, because it's changed automatically. |
 
-**tools**  
+### /tools/
 These scripts can directly be executed by the user or his IDE. Each filename describes the task.
 To automatically close the scripts after execution, execute them with a "noPause" parameter or adjust the `WaitAtFinish` setting in `setMetaData.bat`.
 
@@ -28,7 +28,7 @@ To automatically close the scripts after execution, execute them with a "noPause
 | serverStart.bat | Start local ArmA-DevServer with all built and additional mods. |
 | serverStop.bat | Shutdown local ArmA-DevServer. |
 
-**helpers**  
+### /helpers/
 Here resides some internal helping tools or scripts. You don't need them directly. **Just ignore.**
 
 | File | Info |
