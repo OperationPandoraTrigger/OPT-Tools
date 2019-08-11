@@ -1,0 +1,51 @@
+:: This file is an example file. You need to copy this file (removing the .example from the name)
+:: and adjust the paths to your local file structure
+
+:: Set paths to your cloned OPT repositories
+SET "OptClientRepoDir=n:\OPT-Repos\OPT-Client-Mod\"
+SET "OptServerRepoDir=n:\OPT-Repos\OPT-Server-Mod\"
+SET "OptToolsRepoDir=n:\OPT-Repos\OPT-Tools\"
+SET "OptMissionRepoDir=n:\OPT-Repos\OPT-Mission\"
+SET "OptMissionName=OPT-TestMission.Altis"
+
+:: Set path to a directory where you securely store your OPT private key
+SET "OptKeysDir=n:\OPT-Repos\OPT-Keys\"
+
+:: Set ArmA paths
+SET "ArmaGameDir=C:\Program Files (x86)\Steam\steamapps\common\Arma 3\"
+SET "ArmaMissionPboDir=C:\Program Files (x86)\Steam\steamapps\common\Arma 3\MPMissions\"
+SET "ArmaMissionSourceDir=c:\Users\xxx\Documents\Arma 3\mpmissions\"
+
+:: Set ArmA executables
+SET "ArmaServerExe=arma3server_x64.exe"
+SET "ArmaClientExe=arma3_x64.exe"
+
+:: @CLib and @OPT* mods will be loaded from your build-directories.
+:: If you need more mods, add them here.
+:: Be sure to use absolute paths if they are not directly in the ArmA-directory.
+SET "additionalMods=m:\OPT-Modset\@CBA_A3;m:\OPT-Modset\@ace;m:\OPT-Modset\@ace_particles;m:\OPT-Modset\@tfar;m:\OPT-Modset\@diwako_dui"
+
+:: If you want to read the script output after finish, set TRUE here
+SET WaitAtFinish=TRUE
+
+:: DO NOT EDIT BELOW THIS LINE :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:: Checking if you missed something...
+CALL :CHECK "%OptClientRepoDir%"
+CALL :CHECK "%OptServerRepoDir%"
+CALL :CHECK "%OptToolsRepoDir%"
+CALL :CHECK "%OptMissionRepoDir%\%OptMissionName%"
+CALL :CHECK "%OptKeysDir%"
+CALL :CHECK "%ArmaGameDir%\%ArmaServerExe%"
+CALL :CHECK "%ArmaGameDir%\%ArmaClientExe%"
+CALL :CHECK "%ArmaMissionPboDir%"
+CALL :CHECK "%ArmaMissionSourceDir%"
+EXIT /B 0
+
+:CHECK
+IF NOT EXIST %* (
+	ECHO %* not found. Check your configuration.
+	ECHO Press any key to exit.
+	PAUSE > NUL
+	EXIT 1
+)
