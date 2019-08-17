@@ -5,7 +5,7 @@ ECHO *** This script will rebuild all mission/mods. Running         ***
 ECHO *** server/client will be shut down, and restarted afterwards. ***
 ECHO ******************************************************************
 
-:: Sanity checks
+REM Sanity checks
 IF NOT EXIST "%~dp0.\..\settings\setMetaData.bat" (
 	ECHO setMetaData.bat not found in "settings".
 	ECHO "Check your configuration. (Rename example-file and adjust paths)"
@@ -14,33 +14,33 @@ IF NOT EXIST "%~dp0.\..\settings\setMetaData.bat" (
 	EXIT 1
 )
 
-:: Set meta infos
+REM Set meta infos
 CALL "%~dp0.\..\settings\setMetaData.bat"
 
-:: Check for running ArmaServer and shutdown if running
+REM Check for running ArmaServer and shutdown if running
 TASKLIST /FI "IMAGENAME EQ %ArmaServerExe%" 2> NUL | FIND /I /N "%ArmaServerExe%" > NUL
 IF "%ERRORLEVEL%"=="0" (
 	SET ArmaServerActive=TRUE
 	CALL "%~dp0.\serverStop.bat" noPause
 )
 
-:: Check for running ArmaClient and shutdown if running
+REM Check for running ArmaClient and shutdown if running
 TASKLIST /FI "IMAGENAME EQ %ArmaClientExe%" 2> NUL | FIND /I /N "%ArmaClientExe%" > NUL
 IF "%ERRORLEVEL%"=="0" (
 	SET ArmaClientActive=TRUE
 	CALL "%~dp0.\clientStop.bat" noPause
 )
 
-:: Build all
+REM Build all
 CALL "%~dp0.\buildMission.bat" noPause
 CALL "%~dp0.\buildMod_CLib.bat" noPause
 CALL "%~dp0.\buildMod_OPT-Client.bat" noPause
 CALL "%~dp0.\buildMod_OPT-Server.bat" noPause
 
-:: Restart ArmaServer if it was running before
+REM Restart ArmaServer if it was running before
 IF [%ArmaServerActive%] == [TRUE] CALL "%~dp0.\serverStart.bat" noPause
 
-:: Restart ArmaClient if it was running before
+REM Restart ArmaClient if it was running before
 IF [%ArmaClientActive%] == [TRUE] CALL "%~dp0.\clientStartOnline.bat" noPause
 
 ECHO.

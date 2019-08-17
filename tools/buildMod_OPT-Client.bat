@@ -4,7 +4,7 @@ ECHO *** OPT-Client-Mod builder v0.31               ***
 ECHO *** This script will build the OPT-Client mod. ***
 ECHO **************************************************
 
-:: Sanity checks
+REM Sanity checks
 IF NOT EXIST "%~dp0.\..\settings\setMetaData.bat" (
 	ECHO setMetaData.bat not found in "settings".
 	ECHO "Check your configuration. (Rename example-file and adjust paths)"
@@ -13,7 +13,7 @@ IF NOT EXIST "%~dp0.\..\settings\setMetaData.bat" (
 	EXIT 1
 )
 
-:: Set meta infos
+REM Set meta infos
 CALL "%~dp0.\..\settings\setMetaData.bat"
 
 IF EXIST "%OptClientRepoDir%\@OPT-Client\" (
