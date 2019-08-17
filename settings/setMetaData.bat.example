@@ -32,10 +32,10 @@ SET "additionalMods=m:\OPT-Modset\@CBA_A3;m:\OPT-Modset\@ace;m:\OPT-Modset\@ace_
 SET WaitAtFinish=TRUE
 
 :: If you want the ArmAServer to load the dev- instead of release-build of CLib, set TRUE here 
-SET "LoadClibDev=FALSE"
+SET LoadClibDev=FALSE
 
 :: If you want the ArmAServer to load the dev- instead of release-build of OPT-Server, set TRUE here 
-SET "LoadOptDev=FALSE"
+SET LoadOptDev=FALSE
 
 :: DO NOT EDIT BELOW THIS LINE :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 

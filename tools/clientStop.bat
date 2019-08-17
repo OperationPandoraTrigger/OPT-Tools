@@ -1,6 +1,6 @@
 @ECHO OFF
 ECHO ********************************************************
-ECHO *** ArmA stopper v0.1                                ***
+ECHO *** ArmA stopper v0.11                               ***
 ECHO *** This script stops a running local ArmA instance. ***
 ECHO ********************************************************
 
@@ -42,7 +42,7 @@ ECHO.
 ECHO Successfully killed the client
 
 IF [%1] == [noPause] GOTO :EOF
-IF %WaitAtFinish% == TRUE (
+IF ["%WaitAtFinish%"] == ["TRUE"] (
 	ECHO Press any key to exit.
 	PAUSE > NUL
 )

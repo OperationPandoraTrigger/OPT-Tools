@@ -1,6 +1,6 @@
 @ECHO OFF
 ECHO *************************************************
-ECHO *** OPT-DevServer stopper v0.1                ***
+ECHO *** OPT-DevServer stopper v0.11               ***
 ECHO *** This script stops a local arma dev-server ***
 ECHO *************************************************
 
@@ -42,7 +42,7 @@ ECHO.
 ECHO Successfully killed the server
 
 IF [%1] == [noPause] GOTO :EOF
-IF %WaitAtFinish% == TRUE (
+IF ["%WaitAtFinish%"] == ["TRUE"] (
 	ECHO Press any key to exit.
 	PAUSE > NUL
 )

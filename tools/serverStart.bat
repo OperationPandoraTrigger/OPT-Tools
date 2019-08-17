@@ -1,6 +1,6 @@
 @ECHO OFF
 ECHO ******************************************
-ECHO *** OPT-DevServer starter v0.1         ***
+ECHO *** OPT-DevServer starter v0.21        ***
 ECHO *** This script will start a DevServer ***
 ECHO *** to debug OPT mission and mods.     ***
 ECHO ******************************************
@@ -33,13 +33,13 @@ IF NOT [%errorlevel%] == [0]  (
 :: convert to absolute pathnames so armaserver can read it properly (relative paths and/or double backslashes)
 CALL "%~dp0.\..\helpers\DirConvert.bat" "%OptClientRepoDir%\@OPT-Client" OPT-Client_Dir
 
-IF %LoadClibDev% == TRUE (
+IF ["%LoadClibDev%"] == ["TRUE"] (
 	CALL "%~dp0.\..\helpers\DirConvert.bat" "%OptServerRepoDir%\PBOs\dev\@CLib" CLib_Dir
 ) ELSE (
 	CALL "%~dp0.\..\helpers\DirConvert.bat" "%OptServerRepoDir%\PBOs\release\@CLib" CLib_Dir
 )
 
-IF %LoadOptDev% == TRUE (
+IF ["%LoadOptDev%"] == ["TRUE"] (
 	CALL "%~dp0.\..\helpers\DirConvert.bat" "%OptServerRepoDir%\PBOs\dev\@OPT" OPT-Server_Dir
 ) ELSE (
 	CALL "%~dp0.\..\helpers\DirConvert.bat" "%OptServerRepoDir%\PBOs\release\@OPT" OPT-Server_Dir
@@ -55,7 +55,7 @@ ECHO.
 ECHO Done.
 
 IF [%1] == [noPause] GOTO :EOF
-IF %WaitAtFinish% == TRUE (
+IF ["%WaitAtFinish%"] == ["TRUE"] (
 	ECHO Press any key to exit.
 	PAUSE > NUL
 )

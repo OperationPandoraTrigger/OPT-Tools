@@ -1,6 +1,6 @@
 @ECHO OFF
 ECHO **************************************************
-ECHO *** OPT-Client-Mod builder v0.3                ***
+ECHO *** OPT-Client-Mod builder v0.31               ***
 ECHO *** This script will build the OPT-Client mod. ***
 ECHO **************************************************
 
@@ -52,7 +52,7 @@ ECHO.
 ECHO Done.
 
 IF [%1] == [noPause] GOTO :EOF
-IF %WaitAtFinish% == TRUE (
+IF ["%WaitAtFinish%"] == ["TRUE"] (
 	ECHO Press any key to exit.
 	PAUSE > NUL
 )

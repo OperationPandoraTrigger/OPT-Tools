@@ -1,6 +1,6 @@
 @ECHO OFF
 ECHO ***********************************************
-ECHO *** OPT-Client starter v0.2                 ***
+ECHO *** OPT-Client starter v0.21                ***
 ECHO *** This script will start an ArmA instance ***
 ECHO *** to debug OPT mission and mods.          ***
 ECHO ***********************************************
@@ -36,7 +36,7 @@ ECHO Done.
 ECHO %* | FINDSTR /C:"noPause" 1>NUL
 IF NOT ERRORLEVEL 1 GOTO :EOF
 
-IF %WaitAtFinish% == TRUE (
+IF ["%WaitAtFinish%"] == ["TRUE"] (
 	ECHO Press any key to exit.
 	PAUSE > NUL
 )

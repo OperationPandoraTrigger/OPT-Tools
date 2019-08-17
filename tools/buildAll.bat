@@ -1,6 +1,6 @@
 @ECHO OFF
 ECHO ******************************************************************
-ECHO *** OPT-Rebuild v0.3                                           ***
+ECHO *** OPT-Rebuild v0.31                                          ***
 ECHO *** This script will rebuild all mission/mods. Running         ***
 ECHO *** server/client will be shut down, and restarted afterwards. ***
 ECHO ******************************************************************
@@ -47,7 +47,7 @@ ECHO.
 ECHO All done.
 
 IF [%1] == [noPause] GOTO :EOF
-IF %WaitAtFinish% == TRUE (
+IF ["%WaitAtFinish%"] == ["TRUE"] (
 	ECHO Press any key to exit.
 	PAUSE > NUL
 )
