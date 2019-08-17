@@ -31,9 +31,19 @@ IF NOT [%errorlevel%] == [0]  (
 )
 
 :: convert to absolute pathnames so armaserver can read it properly (relative paths and/or double backslashes)
-CALL "%~dp0.\..\helpers\DirConvert.bat" "%OptServerRepoDir%\PBOs\dev\@CLib" CLib_Dir
 CALL "%~dp0.\..\helpers\DirConvert.bat" "%OptClientRepoDir%\@OPT-Client" OPT-Client_Dir
-CALL "%~dp0.\..\helpers\DirConvert.bat" "%OptServerRepoDir%\PBOs\dev\@OPT" OPT-Server_Dir
+
+IF %LoadClibDev% == TRUE (
+	CALL "%~dp0.\..\helpers\DirConvert.bat" "%OptServerRepoDir%\PBOs\dev\@CLib" CLib_Dir
+) ELSE (
+	CALL "%~dp0.\..\helpers\DirConvert.bat" "%OptServerRepoDir%\PBOs\release\@CLib" CLib_Dir
+)
+
+IF %LoadOptDev% == TRUE (
+	CALL "%~dp0.\..\helpers\DirConvert.bat" "%OptServerRepoDir%\PBOs\dev\@OPT" OPT-Server_Dir
+) ELSE (
+	CALL "%~dp0.\..\helpers\DirConvert.bat" "%OptServerRepoDir%\PBOs\release\@OPT" OPT-Server_Dir
+)
 
 :: change directory to ArmA directory (in which the server-exe resides)
 CD /D "%ArmaGameDir%"
