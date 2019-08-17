@@ -1,43 +1,60 @@
 @ECHO OFF
-REM This file is an example file. You need to copy this file (removing the .example from the name)
-REM and adjust the paths to your local file structure
+REM ****************************************************************
+REM * This file is an example file.                                *
+REM * You need to copy this file (remove ".example" from the name) *
+REM * and adjust the paths to your local file structure            *
+REM ****************************************************************
 
-REM Set paths to your cloned OPT repositories
+REM *********************************************
+REM * Set paths to your cloned OPT repositories *
+REM *********************************************
 SET "OptClientRepoDir=n:\OPT-Repos\OPT-Client-Mod\"
 SET "OptServerRepoDir=n:\OPT-Repos\OPT-Server-Mod\"
 SET "OptToolsRepoDir=n:\OPT-Repos\OPT-Tools\"
 SET "OptMissionRepoDir=n:\OPT-Repos\OPT-Mission\"
 
-REM Set active mission in OPT-Mission repository
+REM ************************************************
+REM * Set active mission in OPT-Mission repository *
+REM ************************************************
 SET "OptMissionName=OPT-TestMission.Altis"
 
-REM Set path to a directory where you securely store your OPT private key
+REM *************************************************************************
+REM * Set path to a directory where you securely store your OPT private key *
+REM *************************************************************************
 SET "OptKeysDir=n:\OPT-Repos\OPT-Keys\"
 
-REM Set ArmA paths
+REM ******************
+REM * Set ArmA paths *
+REM ******************
 SET "ArmaGameDir=C:\Program Files (x86)\Steam\steamapps\common\Arma 3\"
 SET "ArmaMissionPboDir=C:\Program Files (x86)\Steam\steamapps\common\Arma 3\MPMissions\"
 SET "ArmaMissionSourceDir=c:\Users\xxx\Documents\Arma 3\mpmissions\"
 
-REM Set ArmA executables
+REM ************************
+REM * Set ArmA executables *
+REM ************************
 SET "ArmaServerExe=arma3server_x64.exe"
 SET "ArmaClientExe=arma3_x64.exe"
 
-REM @CLib and @OPT* mods will be loaded from your build-directories.
-REM If you need more mods, add them here.
-REM Be sure to use absolute paths if they are not directly in the ArmA-directory.
+REM *********************************************************************************
+REM * @CLib and @OPT* mods will be loaded from your build-directories.              *
+REM * If you need more mods, add them here.                                         *
+REM * Be sure to use absolute paths if they are not directly in the ArmA-directory. *
+REM *********************************************************************************
 SET "additionalMods=m:\OPT-Modset\@CBA_A3;m:\OPT-Modset\@ace;m:\OPT-Modset\@ace_particles;m:\OPT-Modset\@tfar;m:\OPT-Modset\@diwako_dui"
 
-REM If you want to read the script output after finish, set TRUE here
+REM *********************************************************************
+REM * If you want to read the script output after finish, set TRUE here *
+REM *********************************************************************
 SET WaitAtFinish=TRUE
 
-REM If you want the ArmAServer to load the dev- instead of release-build of CLib, set TRUE here 
+REM ***************************************************************************************************
+REM * If you want the ArmAServer to load the dev- instead of release-build of CLib/OPT, set TRUE here *
+REM ***************************************************************************************************
 SET LoadClibDev=FALSE
-
-REM If you want the ArmAServer to load the dev- instead of release-build of OPT-Server, set TRUE here 
 SET LoadOptDev=FALSE
 
-REM DO NOT EDIT BELOW THIS LINE :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+REM *** DO NOT EDIT BELOW THIS LINE ! ***
 
 REM Checking if you missed something...
 CALL :CHECK "%OptClientRepoDir%"
