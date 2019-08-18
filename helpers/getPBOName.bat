@@ -23,7 +23,7 @@ IF NOT EXIST %FILE% (
 	GOTO END
 ) ELSE (
 	REM preprocess the file into a local file called
-	"%OptToolsRepoDir%\helpers\armake2.exe" preprocess -i "%OptServerRepoDir%\dependencies\CLib\addons" %FILE% internal_pboName.h.tmp
+	"%~dp0.\armake2.exe" preprocess -i "%OptServerRepoDir%\dependencies\CLib\addons" %FILE% internal_pboName.h.tmp
 	
 	REM read the last line of the file (contains the pboName spec)
 	FOR /F "delims=" %%x IN (internal_pboName.h.tmp) DO SET pboName=%%x

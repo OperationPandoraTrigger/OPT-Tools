@@ -11,7 +11,6 @@ REM * Set paths to your cloned OPT repositories *
 REM *********************************************
 SET "OptClientRepoDir=n:\OPT-Repos\OPT-Client-Mod\"
 SET "OptServerRepoDir=n:\OPT-Repos\OPT-Server-Mod\"
-SET "OptToolsRepoDir=n:\OPT-Repos\OPT-Tools\"
 SET "OptMissionRepoDir=n:\OPT-Repos\OPT-Mission\"
 
 REM ************************************************
@@ -62,7 +61,6 @@ REM ******************************
 REM Checking if you missed something...
 CALL :CHECK "%%OptClientRepoDir%%"
 CALL :CHECK "%%OptServerRepoDir%%"
-CALL :CHECK "%%OptToolsRepoDir%%"
 CALL :CHECK "%%OptMissionRepoDir%%\%%OptMissionName%%"
 CALL :CHECK "%%OptKeysDir%%"
 CALL :CHECK "%%ArmaGameDir%%\%ArmaServerExe%%"
