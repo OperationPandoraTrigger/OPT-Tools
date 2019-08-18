@@ -2,7 +2,8 @@
 REM ****************************************************************
 REM * This file is an example file.                                *
 REM * You need to copy this file (remove ".example" from the name) *
-REM * and adjust the paths to your local file structure            *
+REM * and adjust the paths to your local file structure.           *
+REM * If you have a pathname with a "%" in it, replace it by "%%"! *
 REM ****************************************************************
 
 REM *********************************************
@@ -54,23 +55,25 @@ REM ****************************************************************************
 SET LoadClibDev=FALSE
 SET LoadOptDev=FALSE
 
-REM *** DO NOT EDIT BELOW THIS LINE ! ***
+REM ******************************
+REM *** DO NOT EDIT BELOW THIS ***
+REM ******************************
 
 REM Checking if you missed something...
-CALL :CHECK "%OptClientRepoDir%"
-CALL :CHECK "%OptServerRepoDir%"
-CALL :CHECK "%OptToolsRepoDir%"
-CALL :CHECK "%OptMissionRepoDir%\%OptMissionName%"
-CALL :CHECK "%OptKeysDir%"
-CALL :CHECK "%ArmaGameDir%\%ArmaServerExe%"
-CALL :CHECK "%ArmaGameDir%\%ArmaClientExe%"
-CALL :CHECK "%ArmaMissionPboDir%"
-CALL :CHECK "%ArmaMissionSourceDir%"
+CALL :CHECK "%%OptClientRepoDir%%"
+CALL :CHECK "%%OptServerRepoDir%%"
+CALL :CHECK "%%OptToolsRepoDir%%"
+CALL :CHECK "%%OptMissionRepoDir%%\%%OptMissionName%%"
+CALL :CHECK "%%OptKeysDir%%"
+CALL :CHECK "%%ArmaGameDir%%\%ArmaServerExe%%"
+CALL :CHECK "%%ArmaGameDir%%\%ArmaClientExe%%"
+CALL :CHECK "%%ArmaMissionPboDir%%"
+CALL :CHECK "%%ArmaMissionSourceDir%%"
 EXIT /B 0
 
 :CHECK
-IF NOT EXIST %* (
-	ECHO %* not found. Check your configuration.
+IF NOT EXIST %1 (
+	ECHO %1 not found. Check your configuration.
 	ECHO Press any key to exit.
 	PAUSE > NUL
 	EXIT 1
