@@ -1,10 +1,10 @@
 @ECHO OFF
 ECHO **************************************************
-ECHO *** OPT-Client-Mod builder v0.3                ***
+ECHO *** OPT-Client-Mod builder v0.4                ***
 ECHO *** This script will build the OPT-Client mod. ***
 ECHO **************************************************
 
-:: Sanity checks
+REM Sanity checks
 IF NOT EXIST "%~dp0.\..\settings\setMetaData.bat" (
 	ECHO setMetaData.bat not found in "settings".
 	ECHO "Check your configuration. (Rename example-file and adjust paths)"
@@ -13,8 +13,8 @@ IF NOT EXIST "%~dp0.\..\settings\setMetaData.bat" (
 	EXIT 1
 )
 
-:: Set meta infos
-CALL "%~dp0.\..\settings\setMetaData.bat"
+REM Set meta infos
+CALL "%%~dp0.\..\settings\setMetaData.bat"
 
 IF EXIST "%OptClientRepoDir%\@OPT-Client\" (
 	ECHO Deleting old build ...
@@ -52,7 +52,7 @@ ECHO.
 ECHO Done.
 
 IF [%1] == [noPause] GOTO :EOF
-IF %WaitAtFinish% == TRUE (
+IF ["%WaitAtFinish%"] == ["TRUE"] (
 	ECHO Press any key to exit.
 	PAUSE > NUL
 )

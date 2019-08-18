@@ -1,10 +1,10 @@
 @ECHO OFF
 ECHO ***********************************************
-ECHO *** OPT-Mission builder v0.2                ***
+ECHO *** OPT-Mission builder v0.21               ***
 ECHO *** This script will build the OPT mission. ***
 ECHO ***********************************************
 
-:: Sanity checks
+REM Sanity checks
 IF NOT EXIST "%~dp0.\..\settings\setMetaData.bat" (
 	ECHO setMetaData.bat not found in "settings".
 	ECHO "Check your configuration. (Rename example-file and adjust paths)"
@@ -13,16 +13,16 @@ IF NOT EXIST "%~dp0.\..\settings\setMetaData.bat" (
 	EXIT 1
 )
 
-:: Set meta infos
-CALL "%~dp0.\..\settings\setMetaData.bat"
+REM Set meta infos
+CALL "%%~dp0.\..\settings\setMetaData.bat"
 
-:: Check/Create symlink for mission folder
+REM Check/Create symlink for mission folder
 IF NOT EXIST "%ArmaMissionSourceDir%\%OptMissionName%" (
-	:: Folder doesnt exist. Check for administrator privileges to be able to create it...
+	REM Folder doesnt exist. Check for administrator privileges to be able to create it...
 	OPENFILES >NUL 2>&1
 	IF ERRORLEVEL 1 (
 		ECHO [101;93mThis batch script once-only requires administrator privileges to create a symlink.[0m
-		ECHO Right-click on %~nx0 and select "[31mRun as administrator[0m".
+		ECHO Right-click on[31m %~nx0 [0mand select "[31mRun as administrator[0m".
 		ECHO Press any key to exit.
 		PAUSE > NUL
 		EXIT 1
@@ -30,7 +30,7 @@ IF NOT EXIST "%ArmaMissionSourceDir%\%OptMissionName%" (
 	ECHO Creating symlink...
 	MKLINK /D "%ArmaMissionSourceDir%\%OptMissionName%" "%OptMissionRepoDir%\%OptMissionName%" > NUL
 	) ELSE (
-	:: Folder exists. Write dummy file to source and look if it appears at the destination...	
+	REM Folder exists. Write dummy file to source and look if it appears at the destination...	
 	ECHO Mission-Folder exists. Checking if its a valid symlink...
 	ECHO. > "%OptMissionRepoDir%\%OptMissionName%\LINKCHECK0815.tmp"
 	IF NOT EXIST "%ArmaMissionSourceDir%\%OptMissionName%\LINKCHECK0815.tmp" (
@@ -52,7 +52,7 @@ ECHO.
 ECHO Done.
 
 IF [%1] == [noPause] GOTO :EOF
-IF %WaitAtFinish% == TRUE (
+IF ["%WaitAtFinish%"] == ["TRUE"] (
 	ECHO Press any key to exit.
 	PAUSE > NUL
 )

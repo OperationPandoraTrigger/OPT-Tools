@@ -1,7 +1,7 @@
 @ECHO OFF
-:: This script convert a path to an absolute pathname
-:: Parameter 1: input pathname. relative or absolute, with or without double backslashes
-:: Parameter 2: output variable name where the clean path is written to
+REM This script convert a path to an absolute pathname
+REM Parameter 1: input pathname. relative or absolute, with or without double backslashes
+REM Parameter 2: output variable name where the clean path is written to
 IF EXIST %1 (
 	SETLOCAL ENABLEDELAYEDEXPANSION
 	PUSHD %1

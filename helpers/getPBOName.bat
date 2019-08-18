@@ -1,49 +1,48 @@
-:: This script will determine the PBO-name based on a file's content (last line will be considered for that.
-:: That line may either specify the name as pboName="<The name>" or if it doesn't follow this scheme the complete
-:: last line will be taken as the name.
-:: The given file will be preprocessed before examination so using macros in order to determine the PBO-name is fine.
-:: This script will set the pboName variable that may be accessed in the calling script.
+@ECHO OFF
+REM This script will determine the PBO-name based on a file's content (last line will be considered for that.
+REM That line may either specify the name as pboName="<The name>" or if it doesn't follow this scheme the complete
+REM last line will be taken as the name.
+REM The given file will be preprocessed before examination so using macros in order to determine the PBO-name is fine.
+REM This script will set the pboName variable that may be accessed in the calling script.
 
-:: Param 0: The path to the file containing the pboName
-:: Param 1: The default value that should be used when the extraction of the file fails (The file doesn't exist)
+REM Param 0: The path to the file containing the pboName
+REM Param 1: The default value that should be used when the extraction of the file fails (The file doesn't exist)
 
-@echo off
+SET FILE=%1
+SET default=%2
 
-set FILE=%1
-set default=%2
-
-if [%FILE%] == [] (
-	:: if no FILE is given, use the default
-	set pboName=%default%
-	goto :end
+IF [%FILE%] == [] (
+	REM if no FILE is given, use the default
+	SET pboName=%default%
+	GOTO END
 )
 
-if not exist %FILE% (
-	:: if the given FILE doesn't exist, use the default
-	set pboName=%default%
-	goto :end
-) else (
-	:: preprocess the file into a local file called
-	"%OptToolsRepoDir%\helpers\armake2.exe" preprocess -i "%OptServerRepoDir%\dependencies\CLib\addons" %FILE% internal_pboName.h.tmp
+IF NOT EXIST %FILE% (
+	REM if the given FILE doesn't exist, use the default
+	SET pboName=%default%
+	GOTO END
+) ELSE (
+	REM preprocess the file into a local file called
+	"%~dp0.\armake2.exe" preprocess -i "%OptServerRepoDir%\dependencies\CLib\addons" %FILE% internal_pboName.h.tmp
 	
-	:: read the last line of the file (contains the pboName spec)
-	for /f "delims=" %%x in (internal_pboName.h.tmp) do set pboName=%%x
+	REM read the last line of the file (contains the pboName spec)
+	FOR /F "delims=" %%x IN (internal_pboName.h.tmp) DO SET pboName=%%x
 	
-	:: delete the temp-file
-	del internal_pboName.h.tmp /q
+	REM delete the temp-file
+	DEL internal_pboName.h.tmp /Q
 )
 
 
-:end
-:: replace double-quotes with single quotes as they don't mess up the script on expansion
-set pboName=%pboName:"='%
+:END
+REM replace double-quotes with single quotes as they don't mess up the script on expansion
+SET pboName=%pboName:"='%
 
-if "%pboName:~0,9%" == "pboName='" (
-	:: The pboName is given in the format pboName="<actualName>" -> trim to <actualName>
-	set pboName=%pboName:~9,-1%
+IF "%pboName:~0,9%" == "pboName='" (
+	REM The pboName is given in the format pboName="<actualName>" -> trim to <actualName>
+	SET pboName=%pboName:~9,-1%
 )
 
-if not "%pboName:~4%" == ".pbo" (
-	:: make sure the name actually ends with .pbo
-	set pboName=%pboName%.pbo
+IF NOT "%pboName:~4%" == ".pbo" (
+	REM make sure the name actually ends with .pbo
+	SET pboName=%pboName%.pbo
 )
