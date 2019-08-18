@@ -1,2 +1,2 @@
 @ECHO OFF
-CALL "%~dp0.\clientStartOffline.bat" -connect=localhost -port=2302 %*
+CALL "%%~dp0.\clientStartOffline.bat" -connect=localhost -port=2302 %*

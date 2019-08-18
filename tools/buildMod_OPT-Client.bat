@@ -1,6 +1,6 @@
 @ECHO OFF
 ECHO **************************************************
-ECHO *** OPT-Client-Mod builder v0.31               ***
+ECHO *** OPT-Client-Mod builder v0.4                ***
 ECHO *** This script will build the OPT-Client mod. ***
 ECHO **************************************************
 
@@ -14,7 +14,7 @@ IF NOT EXIST "%~dp0.\..\settings\setMetaData.bat" (
 )
 
 REM Set meta infos
-CALL "%~dp0.\..\settings\setMetaData.bat"
+CALL "%%~dp0.\..\settings\setMetaData.bat"
 
 IF EXIST "%OptClientRepoDir%\@OPT-Client\" (
 	ECHO Deleting old build ...

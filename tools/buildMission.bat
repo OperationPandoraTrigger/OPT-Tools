@@ -14,7 +14,7 @@ IF NOT EXIST "%~dp0.\..\settings\setMetaData.bat" (
 )
 
 REM Set meta infos
-CALL "%~dp0.\..\settings\setMetaData.bat"
+CALL "%%~dp0.\..\settings\setMetaData.bat"
 
 REM Check/Create symlink for mission folder
 IF NOT EXIST "%ArmaMissionSourceDir%\%OptMissionName%" (
@@ -22,7 +22,7 @@ IF NOT EXIST "%ArmaMissionSourceDir%\%OptMissionName%" (
 	OPENFILES >NUL 2>&1
 	IF ERRORLEVEL 1 (
 		ECHO [101;93mThis batch script once-only requires administrator privileges to create a symlink.[0m
-		ECHO Right-click on %~nx0 and select "[31mRun as administrator[0m".
+		ECHO Right-click on[31m %~nx0 [0mand select "[31mRun as administrator[0m".
 		ECHO Press any key to exit.
 		PAUSE > NUL
 		EXIT 1

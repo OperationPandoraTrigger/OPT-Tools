@@ -1,6 +1,6 @@
 @ECHO OFF
 ECHO ********************************************************
-ECHO *** ArmA stopper v0.2                                ***
+ECHO *** ArmA stopper v0.3                                ***
 ECHO *** This script stops a running local ArmA instance. ***
 ECHO ********************************************************
 
@@ -14,7 +14,7 @@ IF NOT EXIST "%~dp0.\..\settings\setMetaData.bat" (
 )
 
 REM Set meta infos
-CALL "%~dp0.\..\settings\setMetaData.bat"
+CALL "%%~dp0.\..\settings\setMetaData.bat"
 
 REM Kill the client
 REM The loop occurs as long as the killing reports a success status as this means
@@ -27,12 +27,12 @@ ECHO Killing the (potentially) running client. This might take a while...
 TASKKILL /IM %ArmaClientExe% > NUL 2>&1
 IF [%errorlevel%] == [0] (
 	REM sleep 100ms
-	CALL "%~dp0.\..\helpers\sleep.bat" 100
+	CALL "%%~dp0.\..\helpers\sleep.bat" 100
 	GOTO SoftKillLoop
 ) ELSE (
 	:HardKillLoop
 	REM sleep 100ms
-	CALL "%~dp0.\..\helpers\sleep.bat" 100
+	CALL "%%~dp0.\..\helpers\sleep.bat" 100
 
 	REM Hardkill
 	TASKKILL /F /IM %ArmaClientExe% > NUL 2>&1
@@ -42,7 +42,7 @@ IF [%errorlevel%] == [0] (
 	IF "%ERRORLEVEL%"=="0" GOTO HardKillLoop
 
 	REM Check (for reappearing ghost-process) again after short delay
-	CALL "%~dp0.\..\helpers\sleep.bat" 100
+	CALL "%%~dp0.\..\helpers\sleep.bat" 100
 	TASKLIST /FI "IMAGENAME EQ %ArmaClientExe%" 2> NUL | FIND /I /N "%ArmaClientExe%" > NUL
 	IF "%ERRORLEVEL%"=="0" GOTO HardKillLoop
 )

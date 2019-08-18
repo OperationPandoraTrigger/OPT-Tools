@@ -1,6 +1,6 @@
 @ECHO OFF
 ECHO ********************************************
-ECHO *** CLib-Mod builder v0.21               ***
+ECHO *** CLib-Mod builder v0.3                ***
 ECHO *** This script will build the CLib mod. ***
 ECHO ********************************************
 
@@ -14,7 +14,7 @@ IF NOT EXIST "%~dp0.\..\settings\setMetaData.bat" (
 )
 
 REM Set meta infos
-CALL "%~dp0.\..\settings\setMetaData.bat"
+CALL "%%~dp0.\..\settings\setMetaData.bat"
 
 IF NOT EXIST "%OptServerRepoDir%\dependencies\CLib\addons\CLib\" (
 	ECHO Can't find the CLib submodule - did you initialize it via "git submodule update"?
@@ -24,7 +24,7 @@ IF NOT EXIST "%OptServerRepoDir%\dependencies\CLib\addons\CLib\" (
 )
 
 REM This batch file will set the pboName variable
-CALL "%~dp0.\..\helpers\getPBOName.bat" "%OptServerRepoDir%\dependencies\CLib\addons\CLib\pboName.h" clib
+CALL "%%~dp0.\..\helpers\getPBOName.bat" "%%OptServerRepoDir%%\dependencies\CLib\addons\CLib\pboName.h" clib
 
 REM build release
 IF EXIST "%OptServerRepoDir%\PBOs\release\@CLib\" (

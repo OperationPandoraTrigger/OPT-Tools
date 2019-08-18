@@ -1,6 +1,6 @@
 @ECHO OFF
 ECHO *************************************************
-ECHO *** OPT-DevServer stopper v0.2                ***
+ECHO *** OPT-DevServer stopper v0.3                ***
 ECHO *** This script stops a local arma dev-server ***
 ECHO *************************************************
 
@@ -14,7 +14,7 @@ IF NOT EXIST "%~dp0.\..\settings\setMetaData.bat" (
 )
 
 REM Set meta infos
-CALL "%~dp0.\..\settings\setMetaData.bat"
+CALL "%%~dp0.\..\settings\setMetaData.bat"
 
 REM Kill the server
 REM The loop occurs as long as the killing reports a success status as this means
@@ -27,12 +27,12 @@ ECHO Killing the (potentially) running server. This might take a while...
 TASKKILL /IM %ArmaServerExe% > NUL 2>&1
 IF [%errorlevel%] == [0] (
 	REM sleep 100ms
-	CALL "%~dp0.\..\helpers\sleep.bat" 100
+	CALL "%%~dp0.\..\helpers\sleep.bat" 100
 	GOTO SoftKillLoop
 ) ELSE (
 	:HardKillLoop
 	REM sleep 100ms
-	CALL "%~dp0.\..\helpers\sleep.bat" 100
+	CALL "%%~dp0.\..\helpers\sleep.bat" 100
 
 	REM Hardkill
 	TASKKILL /F /IM %ArmaServerExe% > NUL 2>&1
@@ -42,7 +42,7 @@ IF [%errorlevel%] == [0] (
 	IF "%ERRORLEVEL%"=="0" GOTO HardKillLoop
 
 	REM Check (for reappearing ghost-process) again after short delay
-	CALL "%~dp0.\..\helpers\sleep.bat" 100
+	CALL "%%~dp0.\..\helpers\sleep.bat" 100
 	TASKLIST /FI "IMAGENAME EQ %ArmaServerExe%" 2> NUL | FIND /I /N "%ArmaServerExe%" > NUL
 	IF "%ERRORLEVEL%"=="0" GOTO HardKillLoop
 )

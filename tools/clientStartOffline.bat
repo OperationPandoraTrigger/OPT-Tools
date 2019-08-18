@@ -1,6 +1,6 @@
 @ECHO OFF
 ECHO ***********************************************
-ECHO *** OPT-Client starter v0.21                ***
+ECHO *** OPT-Client starter v0.3                 ***
 ECHO *** This script will start an ArmA instance ***
 ECHO *** to debug OPT mission and mods.          ***
 ECHO ***********************************************
@@ -15,10 +15,10 @@ IF NOT EXIST "%~dp0.\..\settings\setMetaData.bat" (
 )
 
 REM Set meta infos
-CALL "%~dp0.\..\settings\setMetaData.bat"
+CALL "%%~dp0.\..\settings\setMetaData.bat"
 
 REM convert mod-dir absolute pathname so arma can read it properly (relative paths and/or double backslashes)
-CALL "%~dp0.\..\helpers\DirConvert.bat" "%OptClientRepoDir%\@OPT-Client" OPT-Client_Dir
+CALL "%%~dp0.\..\helpers\DirConvert.bat" "%%OptClientRepoDir%%\@OPT-Client" OPT-Client_Dir
 
 REM change directory to ArmA directory (in which the client-exe resides)
 CD /D "%ArmaGameDir%"
