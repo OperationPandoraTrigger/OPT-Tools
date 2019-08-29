@@ -17,7 +17,7 @@ REM Set meta infos
 CALL "%%~dp0.\..\settings\setMetaData.bat"
 
 IF NOT EXIST "%OptServerRepoDir%\dependencies\CLib\addons\CLib\" (
-	ECHO Can't find the CLib submodule - did you initialize it via "git submodule update"?
+	ECHO Can't find the CLib submodule - did you initialize it via "git submodule update --init --recursive"?
 	ECHO Press any key to exit.
 	PAUSE > NUL
 	EXIT 1
