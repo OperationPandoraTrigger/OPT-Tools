@@ -1,6 +1,6 @@
 @ECHO OFF
 ECHO **************************************************
-ECHO *** OPT-Server-Mod builder v0.3                ***
+ECHO *** OPT-Server-Mod builder v0.4                ***
 ECHO *** This script will build the OPT-Server mod. ***
 ECHO **************************************************
 
@@ -22,6 +22,14 @@ IF NOT EXIST "%OptServerRepoDir%\dependencies\CLib\addons\CLib\" (
 	PAUSE > NUL
 	EXIT 1
 )
+
+REM Increase build-number (changes the #define in macros.hpp)
+ECHO Increasing build-number...
+FOR /F "TOKENS=3" %%a IN ('FINDSTR /B /C:"#define BUILD " "%OptServerRepoDir%\addons\OPT\macros.hpp"') DO (
+  SET /A "OLDBUILD=%%a"
+  SET /A "NEWBUILD=%%a + 1"
+)
+CSCRIPT "%%~dp0.\..\..\helpers\StringReplace.vbs" "%OptServerRepoDir%\addons\OPT\macros.hpp" "#define BUILD %OLDBUILD%" "#define BUILD %NEWBUILD%" > NUL
 
 REM This batch file will set the pboName variable
 CALL "%%~dp0.\..\helpers\getPBOName.bat" "%%OptServerRepoDir%%\addons\OPT\pboName.h" opt
