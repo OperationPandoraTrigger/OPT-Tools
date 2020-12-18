@@ -54,6 +54,11 @@ REM ****************************************************************************
 SET LoadClibDev=FALSE
 SET LoadOptDev=FALSE
 
+REM **************************************************************************
+REM * If you want a live-view of the server-log while running, set TRUE here *
+REM **************************************************************************
+SET ShowServerLog=TRUE
+
 REM ******************************
 REM *** DO NOT EDIT BELOW THIS ***
 REM ******************************
