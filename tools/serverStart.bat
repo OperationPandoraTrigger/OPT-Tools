@@ -49,7 +49,15 @@ REM change directory to ArmA directory (in which the server-exe resides)
 CD /D "%ArmaGameDir%"
 
 REM Start the server and minimize it once it's started
+ECHO Starting server...
 START /MIN %ArmaServerExe% -config=serverConfig.cfg -profiles=OPT_DevServer -filePatching -serverMod="%CLib_Dir%;%OPT-Server_Dir%" -mod="%OPT-Client_Dir%;%additionalMods%" -debugCallExtension
+
+REM Show live-serverlog if wanted
+IF ["%ShowServerLog%"] == ["TRUE"] (
+	ECHO Waiting a bit for the logfile being created...
+	CALL "%%~dp0.\..\helpers\sleep.bat" 2000
+	CALL "%%~dp0.\serverLog.bat" noPause
+)
 
 ECHO.
 ECHO Done.
