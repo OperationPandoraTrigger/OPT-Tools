@@ -39,7 +39,7 @@ Here resides some internal helping tools or scripts. You don't need them directl
 | getPBOName.bat | Extracts PBO-Name from a header file. |
 | JREPL.bat | regex text processor by [Dave Benham](https://www.dostips.com/forum/viewtopic.php?t=6044) |
 | sleep.bat | Millisecond delays by [Dave Benham](https://stackoverflow.com/questions/29732878/delay-a-batch-file-in-under-a-second/29879492#29879492) |
-| StringReplace.vbs | To replace strings in files.
+| StringReplace.vbs | To replace strings in files by [nil](https://www.computerhope.com/forum/index.php?topic=174809.0) |
 
 ## Wiki
 Our knowledge base is hosted in a neighbor repository:
