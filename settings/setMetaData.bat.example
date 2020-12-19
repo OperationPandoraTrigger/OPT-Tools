@@ -16,7 +16,7 @@ SET "OptMissionRepoDir=n:\OPT-Repos\OPT-Mission\"
 REM ************************************************
 REM * Set active mission in OPT-Mission repository *
 REM ************************************************
-SET "OptMissionName=opt_mission.WL_Rosche"
+SET "OptMissionName=opt_mission.Enoch"
 
 REM *************************************************************************
 REM * Set path to a directory where you securely store your OPT private key *
