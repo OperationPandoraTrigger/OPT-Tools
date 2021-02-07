@@ -18,7 +18,7 @@ REM Set meta infos
 CALL "%%~dp0.\..\settings\setMetaData.bat"
 
 REM Replace Mission-Name in server config
-CALL "%%~dp0.\..\helpers\JREPL.BAT" "MISSIONTEMPLATE" "%%OptMissionName%%" /F "%%~dp0.\..\settings\serverConfig.cfg" > "%TEMP%\serverConfig.cfg"
+CALL "%%~dp0.\..\helpers\JREPL.BAT" "MISSIONTEMPLATE" "%%OptMissionName:.=_%ServerTrainOrWar%.%%" /F "%%~dp0.\..\settings\serverConfig.cfg" > "%TEMP%\serverConfig.cfg"
 
 REM Copy server-config into arma-dir as ArmA can only read configs relative to the exe
 ECHO Trying to copy config file. This might take a while...
