@@ -45,8 +45,13 @@ IF NOT EXIST "%ArmaMissionSourceDir%\%OptMissionName%" (
 	)
 )
 
-ECHO Packing %OptMissionName%.pbo ...
-"%~dp0.\..\helpers\armake2.exe" pack "%OptMissionRepoDir%\%OptMissionName%" "%ArmaMissionPboDir%\%OptMissionName%.pbo"
+ECHO Packing %OptMissionName:.=_war.%.pbo ...
+CSCRIPT "%%~dp0.\..\..\helpers\StringReplace.vbs" "%OptMissionRepoDir%\%OptMissionName%\cba_settings.sqf" "force force opt_SECTORCONTROL_trainingon = true;" "force force opt_SECTORCONTROL_trainingon = false;" > NUL
+"%~dp0.\..\helpers\armake2.exe" pack "%OptMissionRepoDir%\%OptMissionName%" "%ArmaMissionPboDir%\%OptMissionName:.=_war.%.pbo"
+
+ECHO Packing %OptMissionName:.=_train.%.pbo ...
+CSCRIPT "%%~dp0.\..\..\helpers\StringReplace.vbs" "%OptMissionRepoDir%\%OptMissionName%\cba_settings.sqf" "force force opt_SECTORCONTROL_trainingon = false;" "force force opt_SECTORCONTROL_trainingon = true;" > NUL
+"%~dp0.\..\helpers\armake2.exe" pack "%OptMissionRepoDir%\%OptMissionName%" "%ArmaMissionPboDir%\%OptMissionName:.=_train.%.pbo"
 
 ECHO.
 ECHO Done.
