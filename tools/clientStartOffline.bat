@@ -27,7 +27,7 @@ REM space headed parameter string for noPause-filter in the next step
 SET "PARAMS= %*"
 
 REM Start the client
-START %ArmaClientExe% -noPause -nosplash -world=empty -skipIntro -filePatching -mod="%additionalMods%;%OPT-Client_Dir%" %PARAMS:noPause=%
+START %ArmaClientExe% -showScriptErrors -noPause -nosplash -world=empty -skipIntro -filePatching -mod="%additionalMods%;%OPT-Client_Dir%" %PARAMS:noPause=%
 
 ECHO.
 ECHO Done.
