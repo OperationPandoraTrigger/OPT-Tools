@@ -24,8 +24,15 @@ IF EXIST "%OptClientRepoDir%\@OPT-Client\" (
 IF NOT EXIST "%OptClientRepoDir%\@OPT-Client\" (
 	ECHO Creating directories ...
 	MKDIR "%OptClientRepoDir%\@OPT-Client"
-	IF NOT EXIST "%OptClientRepoDir%\@OPT-Client\addons\" MKDIR "%OptClientRepoDir%\@OPT-Client\addons"
-	IF NOT EXIST "%OptClientRepoDir%\@OPT-Client\keys\" MKDIR "%OptClientRepoDir%\@OPT-Client\keys"
+)
+
+IF NOT EXIST "%OptClientRepoDir%\@OPT-Client\addons\" (
+	ECHO Creating directories ...
+	MKDIR "%OptClientRepoDir%\@OPT-Client\addons"
+)
+IF NOT EXIST "%OptClientRepoDir%\@OPT-Client\keys\" (
+	ECHO Creating directories ...
+	MKDIR "%OptClientRepoDir%\@OPT-Client\keys"
 )
 
 IF NOT EXIST "%OptKeysDir%\OPT.bikey" (

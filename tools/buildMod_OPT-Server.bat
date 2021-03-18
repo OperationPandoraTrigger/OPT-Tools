@@ -45,10 +45,25 @@ IF NOT EXIST "%OptServerRepoDir%\PBOs\release\@OPT\addons\" (
 	MKDIR "%OptServerRepoDir%\PBOs\release\@OPT\addons\"
 )
 
-ECHO Building release version of OPT Mod...
-"%~dp0.\..\helpers\armake2.exe" build -i "%OptServerRepoDir%\dependencies\CLib\addons" "%OptServerRepoDir%\addons\OPT" "%OptServerRepoDir%\PBOs\release\@OPT\addons\%pboName%"
+IF NOT EXIST "%OptServerRepoDir%\PBOs\release\@OPT\keys\" (
+	ECHO Creating directories ...
+	MKDIR "%OptServerRepoDir%\PBOs\release\@OPT\keys\"
+)
 
-REM build dev
+IF NOT EXIST "%OptKeysDir%\OPT.bikey" (
+	ECHO Creating public/private keypair ...
+	"%~dp0.\..\helpers\armake2.exe" keygen "%OptKeysDir%\OPT"
+)
+
+IF NOT EXIST "%OptKeysDir%\OPT.biprivatekey" (
+	ECHO Creating public/private keypair ...
+	"%~dp0.\..\helpers\armake2.exe" keygen "%OptKeysDir%\OPT"
+)
+
+ECHO Building release version of OPT Mod...
+"%~dp0.\..\helpers\armake2.exe" build -k "%OptKeysDir%\OPT.biprivatekey" -i "%OptServerRepoDir%\dependencies\CLib\addons" "%OptServerRepoDir%\addons\OPT" "%OptServerRepoDir%\PBOs\release\@OPT\addons\%pboName%"
+
+ECHO Building dev version of the OPT Mod...
 IF EXIST "%OptServerRepoDir%\PBOs\dev\@OPT\" (
 	ECHO Deleting old build ...
 	RMDIR /S /Q "%OptServerRepoDir%\PBOs\dev\@OPT\"
@@ -59,19 +74,30 @@ IF NOT EXIST "%OptServerRepoDir%\PBOs\dev\@OPT\addons\" (
 	MKDIR "%OptServerRepoDir%\PBOs\dev\@OPT\addons\"
 )
 
-ECHO Building dev version of the OPT Mod...
+IF NOT EXIST "%OptServerRepoDir%\PBOs\dev\@OPT\keys\" (
+	ECHO Creating directories ...
+	MKDIR "%OptServerRepoDir%\PBOs\dev\@OPT\keys\"
+)
 	
 REM in order to build the dev-version the ISDEV macro flag has to be set programmatically
 COPY /Y "%OptServerRepoDir%\addons\OPT\isDev.hpp" "%OptServerRepoDir%\addons\OPT\isDev.hpp.original" > NUL
 ECHO:>> "%OptServerRepoDir%\addons\OPT\isDev.hpp"
 ECHO #define ISDEV >> "%OptServerRepoDir%\addons\OPT\isDev.hpp"
 
-"%~dp0.\..\helpers\armake2.exe" build -i "%OptServerRepoDir%\dependencies\CLib\addons" -x isDev.hpp.original "%OptServerRepoDir%\addons\OPT" "%OptServerRepoDir%\PBOs\dev\@OPT\addons\%pboName%"
+"%~dp0.\..\helpers\armake2.exe" build -k "%OptKeysDir%\OPT.biprivatekey" -i "%OptServerRepoDir%\dependencies\CLib\addons" -x isDev.hpp.original "%OptServerRepoDir%\addons\OPT" "%OptServerRepoDir%\PBOs\dev\@OPT\addons\%pboName%"
 
 REM restore the isDev.hpp file
 DEL "%OptServerRepoDir%\addons\OPT\isDev.hpp" /q
 COPY /Y "%OptServerRepoDir%\addons\OPT\isDev.hpp.original" "%OptServerRepoDir%\addons\OPT\isDev.hpp" > NUL
 DEL "%OptServerRepoDir%\addons\OPT\isDev.hpp.original" /q
+
+ECHO Copying static stuff ...
+COPY /Y "%OptServerRepoDir%\README.md" "%OptServerRepoDir%\PBOs\release\@OPT\" > NUL
+COPY /Y "%OptServerRepoDir%\README.md" "%OptServerRepoDir%\PBOs\dev\@OPT\" > NUL
+COPY /Y "%OptServerRepoDir%\LICENSE" "%OptServerRepoDir%\PBOs\release\@OPT\" > NUL
+COPY /Y "%OptServerRepoDir%\LICENSE" "%OptServerRepoDir%\PBOs\dev\@OPT\" > NUL
+COPY /Y "%OptKeysDir%\OPT.bikey" "%OptServerRepoDir%\PBOs\release\@OPT\keys\" > NUL
+COPY /Y "%OptKeysDir%\OPT.bikey" "%OptServerRepoDir%\PBOs\dev\@OPT\keys\" > NUL
 
 ECHO.
 ECHO Done.
