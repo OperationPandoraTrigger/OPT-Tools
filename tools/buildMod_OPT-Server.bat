@@ -1,6 +1,6 @@
 @ECHO OFF
 ECHO **************************************************
-ECHO *** OPT-Server-Mod builder v0.4                ***
+ECHO *** OPT-Server-Mod builder v0.5                ***
 ECHO *** This script will build the OPT-Server mod. ***
 ECHO **************************************************
 
@@ -23,16 +23,16 @@ IF NOT EXIST "%OptServerRepoDir%\dependencies\CLib\addons\CLib\" (
 	EXIT 1
 )
 
-REM Increase build-number (changes the #define in macros.hpp)
+REM Increase build-number (changes the #define in script_version.hpp)
 ECHO Increasing build-number...
-FOR /F "TOKENS=3" %%a IN ('FINDSTR /B /C:"#define BUILD " "%OptServerRepoDir%\addons\OPT\macros.hpp"') DO (
+FOR /F "TOKENS=3" %%a IN ('FINDSTR /B /C:"#define BUILD " "%OptServerRepoDir%\addons\main\script_version.hpp"') DO (
   SET /A "OLDBUILD=%%a"
   SET /A "NEWBUILD=%%a + 1"
 )
-CSCRIPT "%%~dp0.\..\..\helpers\StringReplace.vbs" "%OptServerRepoDir%\addons\OPT\macros.hpp" "#define BUILD %OLDBUILD%" "#define BUILD %NEWBUILD%" > NUL
+CSCRIPT "%%~dp0.\..\..\helpers\StringReplace.vbs" "%OptServerRepoDir%\addons\main\script_version.hpp" "#define BUILD %OLDBUILD%" "#define BUILD %NEWBUILD%" > NUL
 
 REM This batch file will set the pboName variable
-CALL "%%~dp0.\..\helpers\getPBOName.bat" "%%OptServerRepoDir%%\addons\OPT\pboName.h" opt
+CALL "%%~dp0.\..\helpers\getPBOName.bat" "%%OptServerRepoDir%%\addons\main\pboName.h" opt
 
 REM build release
 IF EXIST "%OptServerRepoDir%\PBOs\release\@OPT\" (
@@ -61,43 +61,12 @@ IF NOT EXIST "%OptKeysDir%\OPT.biprivatekey" (
 )
 
 ECHO Building release version of OPT Mod...
-"%~dp0.\..\helpers\armake2.exe" build -k "%OptKeysDir%\OPT.biprivatekey" -i "%OptServerRepoDir%\dependencies\CLib\addons" "%OptServerRepoDir%\addons\OPT" "%OptServerRepoDir%\PBOs\release\@OPT\addons\%pboName%"
-
-ECHO Building dev version of the OPT Mod...
-IF EXIST "%OptServerRepoDir%\PBOs\dev\@OPT\" (
-	ECHO Deleting old build ...
-	RMDIR /S /Q "%OptServerRepoDir%\PBOs\dev\@OPT\"
-)
-
-IF NOT EXIST "%OptServerRepoDir%\PBOs\dev\@OPT\addons\" (
-	ECHO Creating directories ...
-	MKDIR "%OptServerRepoDir%\PBOs\dev\@OPT\addons\"
-)
-
-IF NOT EXIST "%OptServerRepoDir%\PBOs\dev\@OPT\keys\" (
-	ECHO Creating directories ...
-	MKDIR "%OptServerRepoDir%\PBOs\dev\@OPT\keys\"
-)
-	
-REM in order to build the dev-version the ISDEV macro flag has to be set programmatically
-COPY /Y "%OptServerRepoDir%\addons\OPT\isDev.hpp" "%OptServerRepoDir%\addons\OPT\isDev.hpp.original" > NUL
-ECHO:>> "%OptServerRepoDir%\addons\OPT\isDev.hpp"
-ECHO #define ISDEV >> "%OptServerRepoDir%\addons\OPT\isDev.hpp"
-
-"%~dp0.\..\helpers\armake2.exe" build -k "%OptKeysDir%\OPT.biprivatekey" -i "%OptServerRepoDir%\dependencies\CLib\addons" -x isDev.hpp.original "%OptServerRepoDir%\addons\OPT" "%OptServerRepoDir%\PBOs\dev\@OPT\addons\%pboName%"
-
-REM restore the isDev.hpp file
-DEL "%OptServerRepoDir%\addons\OPT\isDev.hpp" /q
-COPY /Y "%OptServerRepoDir%\addons\OPT\isDev.hpp.original" "%OptServerRepoDir%\addons\OPT\isDev.hpp" > NUL
-DEL "%OptServerRepoDir%\addons\OPT\isDev.hpp.original" /q
+"%~dp0.\..\helpers\armake2.exe" build -k "%OptKeysDir%\OPT.biprivatekey" -i "%OptServerRepoDir%\dependencies\CLib\addons" "%OptServerRepoDir%\addons\main" "%OptServerRepoDir%\PBOs\release\@OPT\addons\%pboName%"
 
 ECHO Copying static stuff ...
 COPY /Y "%OptServerRepoDir%\README.md" "%OptServerRepoDir%\PBOs\release\@OPT\" > NUL
-COPY /Y "%OptServerRepoDir%\README.md" "%OptServerRepoDir%\PBOs\dev\@OPT\" > NUL
 COPY /Y "%OptServerRepoDir%\LICENSE" "%OptServerRepoDir%\PBOs\release\@OPT\" > NUL
-COPY /Y "%OptServerRepoDir%\LICENSE" "%OptServerRepoDir%\PBOs\dev\@OPT\" > NUL
 COPY /Y "%OptKeysDir%\OPT.bikey" "%OptServerRepoDir%\PBOs\release\@OPT\keys\" > NUL
-COPY /Y "%OptKeysDir%\OPT.bikey" "%OptServerRepoDir%\PBOs\dev\@OPT\keys\" > NUL
 
 ECHO.
 ECHO Done.

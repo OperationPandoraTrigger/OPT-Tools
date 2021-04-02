@@ -48,11 +48,10 @@ REM * If you want to read the script output after finish, set TRUE here *
 REM *********************************************************************
 SET WaitAtFinish=TRUE
 
-REM ***************************************************************************************************
-REM * If you want the ArmAServer to load the dev- instead of release-build of CLib/OPT, set TRUE here *
-REM ***************************************************************************************************
+REM ***********************************************************************************************
+REM * If you want the ArmAServer to load the dev- instead of release-build of CLib, set TRUE here *
+REM ***********************************************************************************************
 SET LoadClibDev=FALSE
-SET LoadOptDev=FALSE
 
 REM **************************************************************************
 REM * If you want a live-view of the server-log while running, set TRUE here *
