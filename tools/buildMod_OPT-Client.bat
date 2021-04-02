@@ -16,45 +16,40 @@ IF NOT EXIST "%~dp0.\..\settings\setMetaData.bat" (
 REM Set meta infos
 CALL "%%~dp0.\..\settings\setMetaData.bat"
 
-IF EXIST "%OptClientRepoDir%\@OPT-Client\" (
+REM Increase build-number (changes the #define in script_version.hpp)
+ECHO Increasing build-number...
+FOR /F "TOKENS=3" %%a IN ('FINDSTR /B /C:"#define BUILD " "%OptClientRepoDir%\addons\main\script_version.hpp"') DO (
+  SET /A "OLDBUILD=%%a"
+  SET /A "NEWBUILD=%%a + 1"
+)
+CSCRIPT "%%~dp0.\..\..\helpers\StringReplace.vbs" "%OptClientRepoDir%\addons\main\script_version.hpp" "#define BUILD %OLDBUILD%" "#define BUILD %NEWBUILD%" > NUL
+
+REM build release
+IF EXIST "%OptClientRepoDir%\@opt-client\" (
 	ECHO Deleting old build ...
-	RMDIR /S /Q "%OptClientRepoDir%\@OPT-Client\"
+	RMDIR /S /Q "%OptClientRepoDir%\@opt-client\"
 )
 
-IF NOT EXIST "%OptClientRepoDir%\@OPT-Client\" (
-	ECHO Creating directories ...
-	MKDIR "%OptClientRepoDir%\@OPT-Client"
+ECHO Building release version of OPT Client-Mod...
+PUSHD "%OptClientRepoDir%"
+IF EXIST addons\*.pbo DEL addons\*.pbo
+IF EXIST keys RMDIR /S /Q keys
+IF EXIST releases RMDIR /S /Q releases
+
+"%~dp0.\..\helpers\hemtt.exe" build --release --force-release
+IF ERRORLEVEL 1 (
+	ECHO [101;93mAN ERROR HAS OCCURRED![0m
+	ECHO Press any key to exit.
+	PAUSE > NUL
+	EXIT 1
 )
 
-IF NOT EXIST "%OptClientRepoDir%\@OPT-Client\addons\" (
-	ECHO Creating directories ...
-	MKDIR "%OptClientRepoDir%\@OPT-Client\addons"
-)
-IF NOT EXIST "%OptClientRepoDir%\@OPT-Client\keys\" (
-	ECHO Creating directories ...
-	MKDIR "%OptClientRepoDir%\@OPT-Client\keys"
-)
-
-IF NOT EXIST "%OptKeysDir%\OPT.bikey" (
-	ECHO Creating public/private keypair ...
-	"%~dp0.\..\helpers\armake2.exe" keygen "%OptKeysDir%\OPT"
-)
-
-IF NOT EXIST "%OptKeysDir%\OPT.biprivatekey" (
-	ECHO Creating public/private keypair ...
-	"%~dp0.\..\helpers\armake2.exe" keygen "%OptKeysDir%\OPT"
-)
-
-FOR /f %%a IN ('DIR "%OptClientRepoDir%\addons\" /AD /B /ON') DO (
-	ECHO Packing %%a.pbo ...
-	"%~dp0.\..\helpers\armake2.exe" pack -v -k "%OptKeysDir%\OPT.biprivatekey" "%OptClientRepoDir%\addons\%%a" "%OptClientRepoDir%\@OPT-Client\addons\%%a.pbo"
-)
+FOR /f %%d in ('"%~dp0.\..\helpers\hemtt.exe" var version') DO @SET VERSION=%%d
 
 ECHO Copying static stuff ...
-COPY /Y "%OptClientRepoDir%\mod.cpp" "%OptClientRepoDir%\@OPT-Client\" > NUL
-COPY /Y "%OptClientRepoDir%\opt4_icon.paa" "%OptClientRepoDir%\@OPT-Client\" > NUL
-COPY /Y "%OptKeysDir%\OPT.bikey" "%OptClientRepoDir%\@OPT-Client\keys\" > NUL
+XCOPY /S "releases\%VERSION%\@opt-client" "%OptClientRepoDir%\@opt-client\" > NUL
 
+POPD
 ECHO.
 ECHO Done.
 

@@ -37,6 +37,8 @@ Here resides some internal helping tools or scripts. You don't need them directl
 | armake2.exe | ArmA-Modding Tools by [KoffeinFlummi](https://github.com/KoffeinFlummi/armake2) |
 | DirConvert.bat | Converts and cleans any pathname to an absolute pathname and stores it in an environment variable. |
 | getPBOName.bat | Extracts PBO-Name from a header file. |
+| hemtt.exe | Build System for Arma 3 by [Brett Mayson](https://github.com/BrettMayson/HEMTT) |
+| *.dll | OpenSSL libs for HEMTT [OpenSSL](https://slproweb.com/products/Win32OpenSSL.html) |
 | JREPL.bat | regex text processor by [Dave Benham](https://www.dostips.com/forum/viewtopic.php?t=6044) |
 | sleep.bat | Millisecond delays by [Dave Benham](https://stackoverflow.com/questions/29732878/delay-a-batch-file-in-under-a-second/29879492#29879492) |
 | StringReplace.vbs | To replace strings in files by [nil](https://www.computerhope.com/forum/index.php?topic=174809.0) |
