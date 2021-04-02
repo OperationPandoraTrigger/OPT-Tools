@@ -18,7 +18,7 @@ REM Set meta infos
 CALL "%%~dp0.\..\settings\setMetaData.bat"
 
 REM convert mod-dir absolute pathname so arma can read it properly (relative paths and/or double backslashes)
-CALL "%%~dp0.\..\helpers\DirConvert.bat" "%%OptClientRepoDir%%\@OPT-Client" OPT-Client_Dir
+CALL "%%~dp0.\..\helpers\DirConvert.bat" "%%OptClientRepoDir%%\@opt-client" OPT-Client_Dir
 
 REM change directory to ArmA directory (in which the client-exe resides)
 CD /D "%ArmaGameDir%"
@@ -27,7 +27,7 @@ REM space headed parameter string for noPause-filter in the next step
 SET "PARAMS= %*"
 
 REM Start the client
-START %ArmaClientExe% -showScriptErrors -noPause -nosplash -world=empty -skipIntro -filePatching -mod="%additionalMods%;%OPT-Client_Dir%" %PARAMS:noPause=%
+START %ArmaClientExe% -showScriptErrors -noPause -nosplash -world=empty -skipIntro -mod="%additionalMods%;%OPT-Client_Dir%" %PARAMS:noPause=%
 
 ECHO.
 ECHO Done.

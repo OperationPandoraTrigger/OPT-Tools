@@ -1,6 +1,6 @@
 @ECHO OFF
 ECHO **************************************************
-ECHO *** OPT-Server-Mod builder v0.5                ***
+ECHO *** OPT-Server-Mod builder v0.6                ***
 ECHO *** This script will build the OPT-Server mod. ***
 ECHO **************************************************
 
@@ -31,43 +31,32 @@ FOR /F "TOKENS=3" %%a IN ('FINDSTR /B /C:"#define BUILD " "%OptServerRepoDir%\ad
 )
 CSCRIPT "%%~dp0.\..\..\helpers\StringReplace.vbs" "%OptServerRepoDir%\addons\main\script_version.hpp" "#define BUILD %OLDBUILD%" "#define BUILD %NEWBUILD%" > NUL
 
-REM This batch file will set the pboName variable
-CALL "%%~dp0.\..\helpers\getPBOName.bat" "%%OptServerRepoDir%%\addons\main\pboName.h" opt
-
 REM build release
-IF EXIST "%OptServerRepoDir%\PBOs\release\@OPT\" (
+IF EXIST "%OptServerRepoDir%\PBOs\release\@opt-server\" (
 	ECHO Deleting old build ...
-	RMDIR /S /Q "%OptServerRepoDir%\PBOs\release\@OPT\"
-)
-
-IF NOT EXIST "%OptServerRepoDir%\PBOs\release\@OPT\addons\" (
-	ECHO Creating directories ...
-	MKDIR "%OptServerRepoDir%\PBOs\release\@OPT\addons\"
-)
-
-IF NOT EXIST "%OptServerRepoDir%\PBOs\release\@OPT\keys\" (
-	ECHO Creating directories ...
-	MKDIR "%OptServerRepoDir%\PBOs\release\@OPT\keys\"
-)
-
-IF NOT EXIST "%OptKeysDir%\OPT.bikey" (
-	ECHO Creating public/private keypair ...
-	"%~dp0.\..\helpers\armake2.exe" keygen "%OptKeysDir%\OPT"
-)
-
-IF NOT EXIST "%OptKeysDir%\OPT.biprivatekey" (
-	ECHO Creating public/private keypair ...
-	"%~dp0.\..\helpers\armake2.exe" keygen "%OptKeysDir%\OPT"
+	RMDIR /S /Q "%OptServerRepoDir%\PBOs\release\@opt-server\"
 )
 
 ECHO Building release version of OPT Mod...
-"%~dp0.\..\helpers\armake2.exe" build -k "%OptKeysDir%\OPT.biprivatekey" -i "%OptServerRepoDir%\dependencies\CLib\addons" "%OptServerRepoDir%\addons\main" "%OptServerRepoDir%\PBOs\release\@OPT\addons\%pboName%"
+PUSHD "%OptServerRepoDir%"
+IF EXIST addons\*.pbo DEL addons\*.pbo
+IF EXIST keys RMDIR /S /Q keys
+IF EXIST releases RMDIR /S /Q releases
+
+"%~dp0.\..\helpers\hemtt.exe" build --release --force-release
+IF ERRORLEVEL 1 (
+	ECHO [101;93mAN ERROR HAS OCCURRED![0m
+	ECHO Press any key to exit.
+	PAUSE > NUL
+	EXIT 1
+)
+
+FOR /f %%d in ('"%~dp0.\..\helpers\hemtt.exe" var version') DO @SET VERSION=%%d
 
 ECHO Copying static stuff ...
-COPY /Y "%OptServerRepoDir%\README.md" "%OptServerRepoDir%\PBOs\release\@OPT\" > NUL
-COPY /Y "%OptServerRepoDir%\LICENSE" "%OptServerRepoDir%\PBOs\release\@OPT\" > NUL
-COPY /Y "%OptKeysDir%\OPT.bikey" "%OptServerRepoDir%\PBOs\release\@OPT\keys\" > NUL
+XCOPY /S "releases\%VERSION%\@opt-server" "%OptServerRepoDir%\PBOs\release\@opt-server\" > NUL
 
+POPD
 ECHO.
 ECHO Done.
 
