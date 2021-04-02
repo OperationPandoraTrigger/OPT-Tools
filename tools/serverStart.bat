@@ -39,11 +39,7 @@ IF ["%LoadClibDev%"] == ["TRUE"] (
 	CALL "%%~dp0.\..\helpers\DirConvert.bat" "%%OptServerRepoDir%%\PBOs\release\@CLib" CLib_Dir
 )
 
-IF ["%LoadOptDev%"] == ["TRUE"] (
-	CALL "%%~dp0.\..\helpers\DirConvert.bat" "%%OptServerRepoDir%%\PBOs\dev\@OPT" OPT-Server_Dir
-) ELSE (
-	CALL "%%~dp0.\..\helpers\DirConvert.bat" "%%OptServerRepoDir%%\PBOs\release\@OPT" OPT-Server_Dir
-)
+CALL "%%~dp0.\..\helpers\DirConvert.bat" "%%OptServerRepoDir%%\PBOs\release\@OPT" OPT-Server_Dir
 
 REM change directory to ArmA directory (in which the server-exe resides)
 CD /D "%ArmaGameDir%"
