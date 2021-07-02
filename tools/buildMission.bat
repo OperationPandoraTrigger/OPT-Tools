@@ -1,6 +1,6 @@
 @ECHO OFF
 ECHO ***********************************************
-ECHO *** OPT-Mission builder v0.21               ***
+ECHO *** OPT-Mission builder v0.3               ***
 ECHO *** This script will build the OPT mission. ***
 ECHO ***********************************************
 
@@ -45,13 +45,20 @@ IF NOT EXIST "%ArmaMissionSourceDir%\%OptMissionName%" (
 	)
 )
 
-ECHO Packing %OptMissionName:.=_war.%.pbo ...
-CSCRIPT "%%~dp0.\..\..\helpers\StringReplace.vbs" "%OptMissionRepoDir%\%OptMissionName%\cba_settings.sqf" "force force opt_SECTORCONTROL_trainingon = true;" "force force opt_SECTORCONTROL_trainingon = false;" > NUL
-"%~dp0.\..\helpers\armake2.exe" pack "%OptMissionRepoDir%\%OptMissionName%" "%ArmaMissionPboDir%\%OptMissionName:.=_war.%.pbo"
+REM Increase build-number (changes the #define in description.ext)
+ECHO Increasing build-number...
+FOR /F "TOKENS=3" %%a IN ('FINDSTR /B /C:"#define __VERSION__ " "%OptMissionRepoDir%\%OptMissionName%\description.ext"') DO (
+  SET /A "OLDBUILD=%%a"
+  SET /A "NEWBUILD=%%a + 1"
+)
+"%%~dp0.\..\..\helpers\sed.exe" s/"#define __VERSION__ ""%OLDBUILD%"""/"#define __VERSION__ ""%NEWBUILD%"""/g "%OptMissionRepoDir%\%OptMissionName%\description.ext" > "%TEMP%\description.ext"
+MOVE /Y "%TEMP%\description.ext" "%OptMissionRepoDir%\%OptMissionName%\description.ext" > NUL
 
-ECHO Packing %OptMissionName:.=_train.%.pbo ...
-CSCRIPT "%%~dp0.\..\..\helpers\StringReplace.vbs" "%OptMissionRepoDir%\%OptMissionName%\cba_settings.sqf" "force force opt_SECTORCONTROL_trainingon = false;" "force force opt_SECTORCONTROL_trainingon = true;" > NUL
-"%~dp0.\..\helpers\armake2.exe" pack "%OptMissionRepoDir%\%OptMissionName%" "%ArmaMissionPboDir%\%OptMissionName:.=_train.%.pbo"
+REM Extract worldname extension
+FOR /F "tokens=2 delims=." %%a IN ("%OptMissionName%") DO SET EXT=%%a
+
+ECHO Packing opt_v%NEWBUILD%.%EXT%.pbo ...
+"%~dp0.\..\helpers\armake2.exe" pack "%OptMissionRepoDir%\%OptMissionName%" "%ArmaMissionPboDir%\opt_v%NEWBUILD%.%EXT%.pbo"
 
 ECHO.
 ECHO Done.

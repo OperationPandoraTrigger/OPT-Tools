@@ -21,8 +21,9 @@ To automatically close the scripts after execution, execute them with a "noPause
 | buildMod_CLib.bat | Builds both dev- and release-versions of CLib from OPT-Server-Mod. |
 | buildMod_OPT-Client.bat | Packs and signs OPT-Client-Mod. If no keys are present in OptKeysDir, a fresh keypair will be generated first. |
 | buildMod_OPT-Server.bat | Builds both dev- and release-versions of OPT-Server-Mod. |
-| clientStartOffline.bat | Starting ArmA-Client with all built and additional mods. |
-| clientStartOnline.bat | Starting ArmA-Client with all built and additional mods and autoconnects to local DevServer. |
+| clientStartOffline.bat | Starts ArmA-Client with all built and additional mods. |
+| clientStartOnline.bat | Starts ArmA-Client with all built and additional mods and autoconnects to local DevServer. |
+| clientStartHC.bat | Starts ArmA-HeadlessClient with all built and additional mods and autoconnects to local DevServer. |
 | clientStop.bat | Shutdown local ArmA-Client. |
 | serverLog.bat | Shows a liveview of a running servers log.
 | serverRestart.bat | Restarts local ArmA-DevServer. |
@@ -38,8 +39,8 @@ Here resides some internal helping tools or scripts. You don't need them directl
 | DirConvert.bat | Converts and cleans any pathname to an absolute pathname and stores it in an environment variable. |
 | getPBOName.bat | Extracts PBO-Name from a header file. |
 | hemtt.exe | Build System for Arma 3 by [Brett Mayson](https://github.com/BrettMayson/HEMTT) |
-| *.dll | OpenSSL libs for HEMTT [OpenSSL](https://slproweb.com/products/Win32OpenSSL.html) |
-| JREPL.bat | regex text processor by [Dave Benham](https://www.dostips.com/forum/viewtopic.php?t=6044) |
+| *.dll | Libs for HEMTT and SED |
+| sed.exe | String search and replace [GNU](http://gnuwin32.sourceforge.net/packages/sed.htm) |
 | sleep.bat | Millisecond delays by [Dave Benham](https://stackoverflow.com/questions/29732878/delay-a-batch-file-in-under-a-second/29879492#29879492) |
 | StringReplace.vbs | To replace strings in files by [nil](https://www.computerhope.com/forum/index.php?topic=174809.0) |
 

@@ -16,11 +16,11 @@ SET "OptMissionRepoDir=n:\OPT-Repos\OPT-Mission\"
 REM ************************************************
 REM * Set active mission in OPT-Mission repository *
 REM ************************************************
-SET "OptMissionName=opt_mission.Enoch"
+SET "OptMissionName=opt_mission.vt7"
 
-REM *************************************************************************
-REM * Set path to a directory where you securely store your OPT private key *
-REM *************************************************************************
+REM *********************************************************************************
+REM * Set path to a (empty) directory where you securely store your OPT private key *
+REM *********************************************************************************
 SET "OptKeysDir=n:\OPT-Repos\OPT-Keys\"
 
 REM ******************
@@ -41,7 +41,7 @@ REM * @CLib and @OPT* mods will be loaded from your build-directories.          
 REM * If you need more mods, add them here.                                         *
 REM * Be sure to use absolute paths if they are not directly in the ArmA-directory. *
 REM *********************************************************************************
-SET "additionalMods=m:\OPT-Modset\@CBA_A3;m:\OPT-Modset\@ace-opt;m:\OPT-Modset\@tfar;m:\OPT-Modset\@diwako_dui"
+SET "additionalMods=m:\OPT-Modset\@CBA_A3;m:\OPT-Modset\@ace-opt;m:\OPT-Modset\@tfar;m:\OPT-Modset\@diwako_dui;m:\OPT-Modset\@virolahti;m:\OPT-Modset\@cup_terrains_core;m:\OPT-Modset\@cup_units;m:\OPT-Modset\@cup_vehicles;m:\OPT-Modset\@cup_weapons"
 
 REM *********************************************************************
 REM * If you want to read the script output after finish, set TRUE here *
@@ -57,11 +57,6 @@ REM **************************************************************************
 REM * If you want a live-view of the server-log while running, set TRUE here *
 REM **************************************************************************
 SET ShowServerLog=TRUE
-
-REM ****************************************************
-REM * Choose "war" or "train" for local server startup *
-REM ****************************************************
-SET ServerTrainOrWar=train
 
 REM ******************************
 REM *** DO NOT EDIT BELOW THIS ***

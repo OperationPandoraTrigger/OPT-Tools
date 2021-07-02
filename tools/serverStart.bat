@@ -1,6 +1,6 @@
 @ECHO OFF
 ECHO ******************************************
-ECHO *** OPT-DevServer starter v0.3         ***
+ECHO *** OPT-DevServer starter v0.4         ***
 ECHO *** This script will start a DevServer ***
 ECHO *** to debug OPT mission and mods.     ***
 ECHO ******************************************
@@ -17,8 +17,15 @@ IF NOT EXIST "%~dp0.\..\settings\setMetaData.bat" (
 REM Set meta infos
 CALL "%%~dp0.\..\settings\setMetaData.bat"
 
+REM Get last mission name
+:GETLOGFILE
+FOR /F "TOKENS=1" %%a IN ('DIR /B /OD "%ArmaMissionPboDir%\opt_v*.pbo"') DO (
+	SET "MISSION=%%~na"
+)
+
 REM Replace Mission-Name in server config
-CALL "%%~dp0.\..\helpers\JREPL.BAT" "MISSIONTEMPLATE" "%%OptMissionName:.=_%ServerTrainOrWar%.%%" /F "%%~dp0.\..\settings\serverConfig.cfg" > "%TEMP%\serverConfig.cfg"
+COPY "%~dp0.\..\settings\serverConfig.cfg" "%TEMP%\serverConfig.cfg" > NUL
+CSCRIPT "%%~dp0.\..\..\helpers\StringReplace.vbs" "%TEMP%\serverConfig.cfg" "MISSIONTEMPLATE" "%MISSION%" > NUL
 
 REM Copy server-config into arma-dir as ArmA can only read configs relative to the exe
 ECHO Trying to copy config file. This might take a while...
