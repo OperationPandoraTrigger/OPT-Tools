@@ -19,7 +19,8 @@ To automatically close the scripts after execution, execute them with a "noPause
 | buildAll.bat | Rebuild all mission/mods. If ArmA Client/Server are running, they will be shut down first and restarted afterwards. |
 | buildMission.bat | Packs mission from OPT-Mission to PBO-Folder. Mission name is set via `setMetaData.bat`. First start requires administrator rights to create a symlink for EDEN-Editor. |
 | buildMod_CLib.bat | Builds both dev- and release-versions of CLib from OPT-Server-Mod. |
-| buildMod_OPT-Client.bat | Packs and signs OPT-Client-Mod. If no keys are present in OptKeysDir, a fresh keypair will be generated first. |
+| buildMod_OPT-Client.bat | Packs and signs OPT-Client-Mod. |
+| buildMod_OPT-Client_old.bat | Packs and signs OPT-Client-Mod using old armake2 script. |
 | buildMod_OPT-Server.bat | Builds both dev- and release-versions of OPT-Server-Mod. |
 | clientStartOffline.bat | Starts ArmA-Client with all built and additional mods. |
 | clientStartOnline.bat | Starts ArmA-Client with all built and additional mods and autoconnects to local DevServer. |

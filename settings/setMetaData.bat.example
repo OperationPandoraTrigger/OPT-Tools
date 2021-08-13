@@ -41,7 +41,7 @@ REM * @CLib and @OPT* mods will be loaded from your build-directories.          
 REM * If you need more mods, add them here.                                         *
 REM * Be sure to use absolute paths if they are not directly in the ArmA-directory. *
 REM *********************************************************************************
-SET "additionalMods=m:\OPT-Modset\@CBA_A3;m:\OPT-Modset\@ace-opt;m:\OPT-Modset\@tfar;m:\OPT-Modset\@diwako_dui;m:\OPT-Modset\@virolahti;m:\OPT-Modset\@cup_terrains_core;m:\OPT-Modset\@cup_units;m:\OPT-Modset\@cup_vehicles;m:\OPT-Modset\@cup_weapons"
+SET "additionalMods=m:\OPT-Modset\@CBA_A3;m:\OPT-Modset\@ace-opt;m:\OPT-Modset\@tfar;m:\OPT-Modset\@diwako_dui;m:\OPT-Modset\@virolahti;m:\OPT-Modset\@cup_terrains_core;m:\OPT-Modset\@ffcamopack"
 
 REM *********************************************************************
 REM * If you want to read the script output after finish, set TRUE here *
