@@ -16,7 +16,7 @@ SET "OptMissionRepoDir=n:\OPT-Repos\OPT-Mission\"
 REM ************************************************
 REM * Set active mission in OPT-Mission repository *
 REM ************************************************
-SET "OptMissionName=opt_mission.vt7"
+SET "OptMissionName=opt_mission.cup_chernarus_A3"
 
 REM *********************************************************************************
 REM * Set path to a (empty) directory where you securely store your OPT private key *
@@ -41,7 +41,7 @@ REM * @CLib and @OPT* mods will be loaded from your build-directories.          
 REM * If you need more mods, add them here.                                         *
 REM * Be sure to use absolute paths if they are not directly in the ArmA-directory. *
 REM *********************************************************************************
-SET "additionalMods=m:\OPT-Modset\@CBA_A3;m:\OPT-Modset\@ace-opt;m:\OPT-Modset\@tfar;m:\OPT-Modset\@diwako_dui;m:\OPT-Modset\@virolahti;m:\OPT-Modset\@cup_terrains_core;m:\OPT-Modset\@ffcamopack"
+SET "additionalMods=m:\Arma-Repos\OperationPandora\@CBA_A3;m:\Arma-Repos\OperationPandora\@ace-opt;m:\Arma-Repos\OperationPandora\@tfar;m:\Arma-Repos\OperationPandora\@diwako_dui;m:\Arma-Repos\OperationPandora\@cup_terrains_core;m:\Arma-Repos\OperationPandora\@ffcamopack;m:\Arma-Repos\OperationPandora\@cup_terrains_maps"
 
 REM *********************************************************************
 REM * If you want to read the script output after finish, set TRUE here *
