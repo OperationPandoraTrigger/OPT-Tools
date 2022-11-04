@@ -41,7 +41,7 @@ REM * @CLib and @OPT* mods will be loaded from your build-directories.          
 REM * If you need more mods, add them here.                                         *
 REM * Be sure to use absolute paths if they are not directly in the ArmA-directory. *
 REM *********************************************************************************
-SET "additionalMods=m:\Arma-Repos\OperationPandora\@CBA_A3;m:\Arma-Repos\OperationPandora\@ace-opt;m:\Arma-Repos\OperationPandora\@tfar;m:\Arma-Repos\OperationPandora\@diwako_dui;m:\Arma-Repos\OperationPandora\@cup_terrains_core;m:\Arma-Repos\OperationPandora\@ffcamopack;m:\Arma-Repos\OperationPandora\@cup_terrains_maps"
+SET "additionalMods=m:\Arma-Repos\OperationPandora\@CBA_A3;m:\Arma-Repos\OperationPandora\@ace-opt;m:\Arma-Repos\OperationPandora\@tfar;m:\Arma-Repos\OperationPandora\@diwako_dui;m:\Arma-Repos\OperationPandora\@ffcamopack"
 
 REM *********************************************************************
 REM * If you want to read the script output after finish, set TRUE here *
